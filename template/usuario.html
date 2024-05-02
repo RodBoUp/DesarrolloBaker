@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Pasteles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='images/base_fondo.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .intro {
+            background-color: #fff; 
+            padding: 20px;
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            color: #333;
+            border: 2px solid #eea942;
+            display: inline-block; 
+        }
+        .cake {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .cake-item {
+            width: 300px;
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .cake-item h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            border: 2px solid #eea942;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 30%;
+            border-radius: 5px;
+            border: 2px solid #eea942;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #fff;
+            padding: 20px;
+            border-top: 2px solid #ccc;
+            width: 100%;
+        }
+
+        .mensaje-compra {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+    </style>
+</head>
+<body>
+    {% include "cabecera_usuario.html" %}
+    <div class="container">
+        <div class="intro">
+            <h1>Bienvenido a la Tienda de Pasteles</h1>
+            <h2>Pasteles en Venta</h2>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/pastel1.png') }}" alt="Imagen 2">
+            <img src="{{ url_for('static', filename='images/pastel2.png') }}" alt="Imagen 3">
+            <img src="{{ url_for('static', filename='images/pastel3.png') }}" alt="Imagen 4">
+        </div>
+        {% if pasteles %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mostrar in pasteles %}
+                <tr>
+                    <td>{{ mostrar.nombre }}</td>
+                    <td>{{ mostrar.descripcion }}</td>
+                    <td>{{ mostrar.precio }}</td>
+                    <td><button class="btn-comprar">Comprar</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay pasteles disponibles.</p>
+        {% endif %}
+    </div>
+    <footer>
+        <div class="container">
+            <p>Derechos de autor © 2024 Baker's CS. Todos los derechos reservados.</p>
+            <p>Contáctanos: info@CS.com</p>
+        </div>
+    </footer>
+    <div class="mensaje-compra" id="mensajeCompra">
+        <p>Pastel añadido al carrito</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var botonesComprar = document.querySelectorAll('.btn-comprar');
+            botonesComprar.forEach(function (boton) {
+                boton.addEventListener('click', function () {
+                    mostrarMensajeCompra();
+                });
+            });
+
+            function mostrarMensajeCompra() {
+                var mensajeCompra = document.getElementById('mensajeCompra');
+                mensajeCompra.style.display = 'block';
+
+
+                setTimeout(function () {
+                    mensajeCompra.style.display = 'none';
+                }, 1000); 
+            }
+        });
+    </script>
+</body>
+</html>

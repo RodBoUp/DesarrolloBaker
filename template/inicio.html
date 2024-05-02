@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panadería delicioso aroma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='images/inicio_fondo.png') }}") no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        nav {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+        .hero {
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+            color: #333;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-heading {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        .product {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    {% include "cabecera.html" %}
+    <div class="hero">
+        <div class="container">
+            <h1>Panadería Baker's CS</h1>
+            <p>Ofreciendo los mejores panes y pasteles desde 1990</p>
+        </div>
+    </div>
+    <div class="container">
+        <section>
+            <h2 class="section-heading">Nuestros productos destacados</h2>
+            <div class="product">
+                <h3>Pan Artesanal</h3>
+                <p>Delicioso pan recién horneado con ingredientes naturales.</p>
+            </div>
+            <div class="product">
+                <h3>Pastel de Chocolate</h3>
+                <p>Un pastel de chocolate esponjoso y decadente que te encantará.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
